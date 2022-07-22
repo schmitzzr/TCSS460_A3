@@ -1,0 +1,29 @@
+{
+  "name": "a3-api",
+  "version": "1.0.0",
+  "description": "Assignment 3 Node.js Application",
+  "main": "app.js",
+  "scripts": {
+    "test": "build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/schmitzzr/TCSS460_A3.git"
+  },
+  "keywords": [
+    "node",
+    "js",
+    "assignment",
+    "3",
+    "microservices"
+  ],
+  "author": "Zach Schmitz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/schmitzzr/TCSS460_A3/issues"
+  },
+  "homepage": "https://github.com/schmitzzr/TCSS460_A3#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
