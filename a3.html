@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 3</title>
+
+    <link rel="stylesheet" href="https://bootswatch.com/5/slate/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+    <!-- HTML code for displaying the navigation bar on the top -->
+    <nav class="navbar navbar-dark bg-primary mb-3">
+        <div class="container">
+            <a href="#" class="navbar-brand">Assignment 3</a>
+        </div>
+    </nav>
+
+    <!-- HTML code for displaying the search container -->
+    <div class="container mainContainer">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+            <!-- this is the tab for my first web service Convert To Binary -->
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="toBinary-tab" data-toggle="tab" href="#toBinaryPanel" role="tab" aria-controls="toBinaryPanel"
+                    aria-selected="true">Decimal to Binary</a>
+            </li>
+
+            <!-- this is the tab for my second web service Convert From Binary -->
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="fromBinary-tab" data-toggle="tab" href="#fromBinaryPanel" role="tab" aria-controls="fromBinaryPanel"
+                    aria-selected="true">Binary to Decimal</a>
+            </li>
+
+            <!-- this is the tab for my third web service Convert To Hexadecimal -->
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="toHex-tab" data-toggle="tab" href="#toHexPanel" role="tab" aria-controls="toHexPanel"
+                    aria-selected="true">Decimal to Hexadecimal</a>
+            </li>
+            
+            <!-- this is the tab for my fourth web service Convert From Hexadecimal -->
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="fromHex-tab" data-toggle="tab" href="#fromHexPanel" role="tab" aria-controls="fromHexPanel"
+                    aria-selected="true">Hexadecimal to Decimal</a>
+            </li>
+
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+
+            <!-- content for my service 1 tab Convert To Binary-->
+            <div class="tab-pane fade show active" id="toBinaryPanel" role="tabpanel" aria-labelledby="toBinary-tab">
+                <br>
+                <div class="card border-primary mb-3">
+                    <div class="card-header">Convert Decimal to Binary</div>
+                    <div class="card-body">
+                        <p class="lead">Enter a positive integer:</p>
+                        <input type="number" id="num1" class="form-control"
+                            min="0">
+                        <br>
+                        <button type="submit" class="btn btn-primary" id="convertNumToBinary">Calculate</button>
+                    </div>
+                    <div class="card-footer" id="resultNumToBinary"></div>
+                </div>
+            </div>
+
+            <!-- content for my service 2 tab Convert From Binary-->
+            <div class="tab-pane fade show " id="fromBinaryPanel" role="tabpanel" aria-labelledby="fromBinary-tab">
+                <br>
+                <div class="card border-primary mb-3">
+                    <div class="card-header">Convert Binary to Decimal</div>
+                    <div class="card-body">
+                        <p class="lead">Enter a binary numeral (must only contain 0s and 1s):</p>
+                        <input type="number" id="binaryNum" class="form-control"
+                            min="0">
+                        <br>
+                        <button type="submit" class="btn btn-primary" id="convertBinaryToNum">Calculate</button>
+                    </div>
+                    <div class="card-footer" id="resultBinaryToNum"></div>
+                </div>
+            </div>
+
+            <!-- content for my service 3 tab Convert to Hexadecimal-->
+            <div class="tab-pane fade show " id="toHexPanel" role="tabpanel" aria-labelledby="toHex-tab">
+                <br>
+                <div class="card border-primary mb-3">
+                    <div class="card-header">Convert Decimal to Hexadecimal</div>
+                    <div class="card-body">
+                        <p class="lead">Enter a positive integer:</p>
+                        <input type="number" id="num2" class="form-control"
+                            min="0">
+                        <br>
+                        <button type="submit" class="btn btn-primary" id="convertNumToHex">Calculate</button>
+                        <br>
+                    </div>
+                    <div class="card-footer" id="resultNumToHex"></div>
+                </div>
+            </div>
+
+            <!-- content for my service 4 tab Convert From Hexadecimal-->
+            <div class="tab-pane fade show " id="fromHexPanel" role="tabpanel" aria-labelledby="fromHex-tab">
+                <br>
+                <div class="card border-primary mb-3">
+                    <div class="card-header">Convert Hexadecimal to Decimal</div>
+                    <div class="card-body">
+                        <p class="lead">Enter a hexadecimal number (can only contain numbers 0-9 or symbols a-f):</p>
+                        <input type="text" id="hexNum" class="form-control"
+                            min="0">
+                        <br>
+                        <button type="submit" class="btn btn-primary" id="convertHexToNum">Calculate</button>
+                        <br>
+                    </div>
+                    <div class="card-footer" id="resultHexToNum"></div>
+                </div>
+            </div>
+            
+    </div>
+
+
+    <script>
+        $('#convertNumToBinary').click(async function() {
+            const num = $("#num1").val();
+
+            const url = `http://localhost:3000/toBinary/${num}/`;
+            const response = await fetch (url, {
+                method: 'GET',
+                cache: 'no-cache',
+                mode: 'cors',
+                credentials: 'same-origin'
+            });
+
+            const responseData = await response.json();
+            $("#resultNumToBinary").html("<b>Result:  " + responseData.result + "</b>");
+        });
+
+        $('#convertBinaryToNum').click(async function() {
+            const num = $("#binaryNum").val();
+
+            const url = `http://localhost:3000/fromBinary/${num}/`;
+            const response = await fetch (url, {
+                method: 'GET',
+                cache: 'no-cache',
+                mode: 'cors',
+                credentials: 'same-origin'
+            });
+
+            const responseData = await response.json();
+            $("#resultBinaryToNum").html("<b>Result:  " + responseData.result + "</b>");
+        });
+
+        $('#convertNumToHex').click(async function() {
+            const num = $("#num2").val();
+
+            const url = `http://localhost:3000/toHex/${num}/`;
+            const response = await fetch (url, {
+                method: 'GET',
+                cache: 'no-cache',
+                mode: 'cors',
+                credentials: 'same-origin'
+            });
+
+            const responseData = await response.json();
+            $("#resultNumToHex").html("<b>Result:  " + responseData.result + "</b>");
+        });
+
+        $('#convertHexToNum').click(async function() {
+            const num = $("#hexNum").val();
+
+            const url = `http://localhost:3000/fromHex/${num}/`;
+            const response = await fetch (url, {
+                method: 'GET',
+                cache: 'no-cache',
+                mode: 'cors',
+                credentials: 'same-origin'
+            });
+
+            const responseData = await response.json();
+            $("#resultHexToNum").html("<b>Result:  " + responseData.result + "</b>");
+        });
+
+
+    </script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>
